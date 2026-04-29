@@ -15,6 +15,12 @@ out/
 # vercel
 .vercel
 
+# demo artifacts
+demo-frames/
+druida-demo.gif
+make-gif.py
+record-demo.mjs
+.claude/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -22,3 +28,5 @@ next-env.d.ts
 # misc
 .DS_Store
 *.log
+
+.vercel
