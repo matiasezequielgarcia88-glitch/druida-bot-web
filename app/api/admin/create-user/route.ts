@@ -35,11 +35,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: msg }, { status: 400 })
   }
 
-  // Create profile (trigger may or may not have fired — upsert to be safe)
+  // Create profile — admin-created users don't need to change password
   await admin.from('profiles').upsert({
     id: created.user!.id,
     role: 'user',
-    must_change_password: true,
+    must_change_password: false,
   })
 
   return NextResponse.json({ ok: true, id: created.user!.id, email })
