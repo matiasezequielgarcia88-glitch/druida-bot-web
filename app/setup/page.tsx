@@ -50,7 +50,7 @@ export default function SetupPage() {
             value={code}
             onChange={e => setCode(e.target.value.toUpperCase())}
             placeholder="DRUID-XXXX-XX"
-            maxLength={14}
+            maxLength={20}
             required
           />
 

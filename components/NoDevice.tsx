@@ -82,7 +82,7 @@ export default function NoDevice() {
               value={code}
               onChange={e => setCode(e.target.value.toUpperCase())}
               placeholder="XXXX-XXXXXX"
-              maxLength={12}
+              maxLength={20}
               required
               autoFocus
             />
