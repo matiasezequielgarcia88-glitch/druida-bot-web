@@ -24,15 +24,28 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
-  // Rutas públicas
+  // Rutas siempre públicas
   if (pathname === '/login') {
     if (user) return NextResponse.redirect(new URL('/', request.url))
     return supabaseResponse
   }
 
-  // Rutas protegidas — redirigir si no hay sesión
+  // Sin sesión → login
   if (!user) {
     return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  // Forzar cambio de contraseña — consulta el perfil
+  if (pathname !== '/change-password') {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('must_change_password')
+      .eq('id', user.id)
+      .single()
+
+    if (profile?.must_change_password) {
+      return NextResponse.redirect(new URL('/change-password', request.url))
+    }
   }
 
   return supabaseResponse
