@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Rutas siempre públicas
-  if (pathname === '/login') {
+  if (pathname === '/login' || pathname === '/register') {
     if (user) return NextResponse.redirect(new URL('/', request.url))
     return supabaseResponse
   }

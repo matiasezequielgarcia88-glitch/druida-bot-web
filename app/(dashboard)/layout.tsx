@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase-server'
 import DashboardShell from '@/components/DashboardShell'
+import NoDevice from '@/components/NoDevice'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -14,8 +15,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .eq('user_id', user.id)
     .single()
 
-  // Sin dispositivo vinculado → página de setup
-  if (!device) redirect('/setup')
+  if (!device) return <NoDevice />
 
   return (
     <DashboardShell deviceId={device.device_id} deviceName={device.name}>
