@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
   await admin.from('profiles').upsert({
     id: created.user!.id,
     role: 'user',
-    must_change_password: false,
+    must_change_password: true,
   })
 
   return NextResponse.json({ ok: true, id: created.user!.id, email })
